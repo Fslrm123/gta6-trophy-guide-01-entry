@@ -1,49 +1,48 @@
 # Leonida Legend — GTA VI Trophy Guide
 
-[![make.fun · gta6-trophy-guide-01](https://make.fun/badge/gta6-trophy-guide-01.svg)](https://make.fun/bounty/gta6-trophy-guide-01)
-[![rank](https://make.fun/badge/gta6-trophy-guide-01/Fslrm123/gta6-trophy-guide-01-entry/rank.svg)](https://make.fun/bounty/gta6-trophy-guide-01/leaderboard)
+[![make.fun](https://make.fun/badge/gta6-trophy-guide-01.svg)](https://make.fun/bounty/gta6-trophy-guide-01)
+[![rank](https://make.fun/badge/gta6-trophy-guide-01/Fslrm123/gta6-trophy-guide-01-entry/rank.svg)](https://make.fun/bounty/gta6-trophy-guide-01)
 [![reward](https://make.fun/badge/gta6-trophy-guide-01/Fslrm123/gta6-trophy-guide-01-entry/reward.svg)](https://make.fun/bounty/gta6-trophy-guide-01)
 
-Entry for the make.fun bounty **Build the best GTA 6 trophy guide** (`gta6-trophy-guide-01`).
+An offline guide and tracker for all **55 Grand Theft Auto VI trophies** (PlayStation 5).
+Every trophy carries a full authored guide — what to do, where and when to do it, practical
+tips, a missable note, a difficulty rating (1–5) and a time estimate — plus a “Your road to
+Platinum” roadmap, live progress ring and per-grade stat cards, search across names,
+descriptions and guides, grade filters, hide-earned toggle and four sort modes. Your ticks
+are saved on your device; the app makes zero network requests.
 
-![The guide](screenshots/1-checklist.jpg)
+Built for the make.fun bounty
+[gta6-trophy-guide-01](https://make.fun/bounty/gta6-trophy-guide-01).
+New to make.fun? Join with the referral link: https://make.fun/r/3v2j7j85
 
-## What it is
+## How to run
 
-**Leonida Legend** is a complete trophy guide and tracker for Grand Theft Auto VI (PlayStation 5).
-Every one of the 55 official trophies gets a full step-by-step guide written for this entry —
-what to do, where and when, pro tips, missable warnings, a difficulty rating and a time estimate.
-The app wraps those guides in a Vice City neon tracker:
+Serve the app locally (Node 22, standard library only — no install, no build step):
 
-- **Progress dashboard** — a completion ring plus earned counts per grade (platinum / gold / silver / bronze).
-- **Search** across trophy names, descriptions and guide text.
-- **Grade filter chips** and a **hide-earned** toggle.
-- **Sorting** by grade, by name, unearned-first, or trophy-list order.
-- **Detail view** for every trophy with the full guide, pro tip, missable note, difficulty stars and time estimate.
-- **Checkboxes** to tick trophies off as you earn them; the completion percentage updates live.
-
-Everything runs offline from plain static files — no build step, no network requests.
-
-## Run it
-
-```bash
-node serve.ts          # serves app/ on http://localhost:8080
-node main.ts           # writes app/, screenshots/ and dossier.json to /output
+```sh
+node serve.ts
 ```
 
-Outside the grader's container, `MAKEFUN_OUTPUT_DIR` stands in for `/output`:
+Then open http://localhost:8080.
 
-```bash
+Or run the entry program, which copies `app/` and `screenshots/` to the output directory
+and writes the make.fun `dossier.json`:
+
+```sh
 mkdir -p out && MAKEFUN_OUTPUT_DIR=out node main.ts
 ```
 
-## Layout
+## What's inside
 
-- `app/index.html`, `app/app.js`, `app/style.css` — the guide app (hand-written, no libraries).
-- `app/data/trophies.json` — the 55 official trophies with enriched guides.
-- `screenshots/` — the four judge screenshots.
-- `main.ts` + `vendor/makefun-frontend.ts` — the make.fun entry plumbing.
+- `app/` — the static frontend: `index.html`, `app.js`, `style.css`, `data/trophies.json`
+  (the official 55 trophies with authored guides).
+- `main.ts` — the program/v1 entry: copies the app and screenshots to the output and
+  writes `dossier.json` via the vendored make.fun library.
+- `enrich_guides.py` — regenerates `app/data/trophies.json` from the official starter
+  list, attaching the authored guide, tips, missable note, difficulty and time estimate
+  for every trophy.
+- `screenshots/` — 1280×480 captures of the checklist, a trophy detail modal, the silver
+  grade filter and a search.
 
----
-
-Built for [make.fun](https://make.fun/r/3v2j7j85) — referral code **3v2j7j85**.
+Keyboard: `/` focuses search, `e` toggles hide-earned, `Esc` closes the detail view.
+Progress persists in `localStorage` on the device only — nothing is uploaded, ever.

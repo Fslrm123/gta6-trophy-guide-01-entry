@@ -3,95 +3,103 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Leonida Legend — a complete offline GTA VI trophy guide for all 55 trophies with guides, tips, difficulty and time estimates.">
 <title>Leonida Legend — GTA VI Trophy Guide</title>
+<meta name="description" content="Offline guide and tracker for all 55 GTA VI trophies: full walkthroughs, difficulty ratings, time estimates and a road map to the platinum.">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header class="topbar">
-  <div class="wrap topbar-inner">
-    <div class="brand">
-      <div class="brand-mark" aria-hidden="true">
-        <svg viewBox="0 0 32 32" width="32" height="32"><circle cx="16" cy="16" r="14" fill="none" stroke="currentColor" stroke-width="2"/><path d="M10 22 L16 9 L22 22 L18.5 22 L16 16 L13.5 22 Z" fill="currentColor"/></svg>
-      </div>
-      <div>
-        <h1>Leonida Legend</h1>
-        <p class="tagline">GTA VI trophy guide &mdash; all 55 trophies, every guide in one place</p>
-      </div>
+<header class="hero">
+  <div class="hero-inner">
+    <div class="hero-copy">
+      <p class="eyebrow">Grand Theft Auto VI · PlayStation 5</p>
+      <h1>Leonida Legend</h1>
+      <p class="tagline">The complete trophy guide &amp; tracker — all 55 trophies, every route to the platinum, fully offline.</p>
+      <p class="hero-note">Guides, difficulty ratings and time estimates for the official trophy list. Tick trophies off as you earn them; progress is saved on this device.</p>
     </div>
-    <div class="topbar-meta">
-      <span class="badge">Offline guide</span>
-      <span class="badge badge-soft">55 trophies</span>
-    </div>
-  </div>
-</header>
-
-<section class="stats-band">
-  <div class="wrap stats-inner">
-    <div class="ring-card">
-      <svg class="ring" viewBox="0 0 120 120" width="120" height="120" role="img" aria-label="Completion">
-        <circle cx="60" cy="60" r="52" fill="none" stroke="#1e2a45" stroke-width="10"/>
-        <circle id="ringProgress" cx="60" cy="60" r="52" fill="none" stroke="#22d3ee" stroke-width="10" stroke-linecap="round" stroke-dasharray="326.7" stroke-dashoffset="326.7" transform="rotate(-90 60 60)"/>
+    <div class="ring-wrap" aria-label="Overall completion">
+      <svg class="ring" viewBox="0 0 120 120" role="img" aria-label="Completion ring">
+        <circle class="ring-track" cx="60" cy="60" r="52"></circle>
+        <circle class="ring-fill" id="ringFill" cx="60" cy="60" r="52"></circle>
       </svg>
       <div class="ring-center">
-        <strong id="pctLabel">0%</strong>
-        <span id="countLabel">0 / 55 earned</span>
+        <span class="ring-pct" id="ringPct">0%</span>
+        <span class="ring-count" id="ringCount">0 / 55</span>
       </div>
     </div>
-    <div class="grade-stats" id="gradeStats"></div>
-    <div class="stats-note">
-      <h2>Your road to Platinum</h2>
-      <p>Tick trophies as you earn them. Open any card for the full guide, pro tip, missable warning, difficulty and time estimate. Press <kbd>/</kbd> to search, <kbd>e</kbd> to hide earned.</p>
-    </div>
   </div>
+  <div class="grade-cards" id="gradeCards" aria-label="Progress by grade"></div>
+</header>
+
+<section class="roadmap">
+  <h2>Your road to Platinum</h2>
+  <ol class="steps">
+    <li><strong>Finish the story.</strong> Chapters 1–4 and the finale hand you 13 trophies and open the whole map.</li>
+    <li><strong>Clear the strands.</strong> Eight stranger strands (Andy, Kenton, Billy, Randy, Tyrone and friends) unlock a silver.</li>
+    <li><strong>Sweep the map.</strong> Explore all 52 areas, meditate at 18 spots and WAiNK It at 100 locations in one long tour.</li>
+    <li><strong>Grind the counters.</strong> 250 stunts, 50 challenges, 100 vehicles and 3 card sets — all repeatable in free roam.</li>
+    <li><strong>Hit 100%.</strong> The gold “A Long Road” falls when the Progress checklist is complete — then the platinum pops.</li>
+  </ol>
+  <p class="roadmap-note">Nothing on the list is missable: every trophy stays earnable in post-story free roam. Estimated total: 60–80 hours.</p>
 </section>
 
-<div class="toolbar">
-  <div class="wrap toolbar-inner">
-    <label class="search">
-      <span class="search-icon" aria-hidden="true">&#9906;</span>
-      <input id="searchInput" type="search" placeholder="Search trophies, descriptions, guides&hellip;" autocomplete="off">
-    </label>
-    <div class="chips" id="gradeChips" role="group" aria-label="Filter by grade"></div>
-    <label class="toggle">
-      <input type="checkbox" id="hideEarned">
-      <span>Hide earned</span>
-    </label>
-    <label class="sort">
-      <span>Sort</span>
-      <select id="sortSelect">
-        <option value="default">Default order</option>
-        <option value="name">Name A&ndash;Z</option>
-        <option value="grade">Grade</option>
-        <option value="difficulty">Difficulty</option>
-      </select>
-    </label>
+<div class="toolbar" id="toolbar">
+  <div class="search-pill">
+    <svg class="search-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M10.5 3a7.5 7.5 0 1 0 4.6 13.5l5 5 1.4-1.4-5-5A7.5 7.5 0 0 0 10.5 3zm0 2a5.5 5.5 0 1 1 0 11 5.5 5.5 0 0 1 0-11z"/></svg>
+    <input id="search" type="search" placeholder="Search trophies, descriptions, guides…  ( / )" autocomplete="off" aria-label="Search trophies">
   </div>
+  <div class="chips" id="chips" role="group" aria-label="Filter by grade">
+    <button type="button" class="chip is-active" data-grade="all">All</button>
+    <button type="button" class="chip" data-grade="platinum">Platinum</button>
+    <button type="button" class="chip" data-grade="gold">Gold</button>
+    <button type="button" class="chip" data-grade="silver">Silver</button>
+    <button type="button" class="chip" data-grade="bronze">Bronze</button>
+  </div>
+  <label class="toggle">
+    <input type="checkbox" id="hideEarned">
+    <span>Hide earned <kbd>e</kbd></span>
+  </label>
+  <label class="sort-label">Sort
+    <select id="sort" aria-label="Sort trophies">
+      <option value="default">Trophy order</option>
+      <option value="name">Name A–Z</option>
+      <option value="difficulty">Easiest first</option>
+      <option value="time">Shortest first</option>
+    </select>
+  </label>
 </div>
 
-<main class="wrap">
-  <p class="result-line" id="resultLine"></p>
-  <div class="grid" id="trophyGrid"></div>
-  <div class="empty" id="emptyState" hidden>
-    <h3>No trophies match</h3>
-    <p>Try a different search or clear the grade filter.</p>
-  </div>
-</main>
+<p class="result-line" id="resultLine" role="status"></p>
+<main class="grid" id="grid"></main>
+<p class="empty" id="empty" hidden>No trophies match. Try a different search or clear the grade filter.</p>
 
 <footer class="footer">
-  <div class="wrap footer-inner">
-    <p>Leonida Legend &mdash; an unofficial fan guide. GTA VI and all trophy names belong to Rockstar Games. Guides are community-written summaries; always confirm in-game.</p>
-    <p class="footer-sub">Built to run fully offline &middot; 55 trophies &middot; Vice City edition</p>
-  </div>
+  <p>Leonida Legend — an unofficial fan guide for the official 55-trophy list. Grand Theft Auto VI is a trademark of Take-Two Interactive; this guide is not affiliated with Rockstar Games.</p>
+  <p>Works fully offline — no accounts, no tracking, no network requests. Your ticks never leave this device. Keys: <kbd>/</kbd> search · <kbd>e</kbd> hide earned · <kbd>Esc</kbd> close.</p>
 </footer>
 
 <div class="modal-backdrop" id="modalBackdrop" hidden>
   <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-    <button class="modal-close" id="modalClose" aria-label="Close">&times;</button>
-    <div id="modalBody"></div>
+    <button type="button" class="modal-close" id="modalClose" aria-label="Close">×</button>
+    <div class="modal-head">
+      <span class="modal-icon" id="modalIcon"></span>
+      <div>
+        <h3 id="modalTitle"></h3>
+        <p class="modal-desc" id="modalDesc"></p>
+        <p class="modal-grade" id="modalGrade"></p>
+      </div>
+    </div>
+    <div class="fact-grid" id="factGrid"></div>
+    <h4>Guide</h4>
+    <p class="modal-guide" id="modalGuide"></p>
+    <h4>Pro tip</h4>
+    <p class="modal-tip" id="modalTip"></p>
+    <label class="modal-earned">
+      <input type="checkbox" id="modalEarned">
+      <span>Mark as earned</span>
+    </label>
   </div>
 </div>
 
-<script src="app.js"></script>
+<script type="module" src="app.js"></script>
 </body>
 </html>
